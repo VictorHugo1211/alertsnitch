@@ -110,6 +110,10 @@ func (d PostgresDB) Save(data *internal.AlertGroup) error {
 					return fmt.Errorf("failed to insert into AlertLabel: %s", err)
 				}
 			}
+			fmt.Printf("\n\n*=============================================*\n\n")
+			for _, value := range alert.Annotations {
+          		fmt.Printf("- %d\n", value)
+        	}
 			for k, v := range alert.Annotations {
 				_, err := tx.Exec(`
 					INSERT INTO AlertAnnotation (AlertID, Annotation, Value)
